@@ -60,7 +60,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.filled.GetApp
 import com.example.ui.components.BluetoothPermissionDialog
+import com.example.ui.components.InstallGuideDialog
 import com.example.ui.screens.DevicesScreen
 import com.example.ui.screens.LatencyLabScreen
 import com.example.ui.screens.RadarScreen
@@ -93,6 +96,7 @@ fun MainScreen(
     var selectedTab by remember { mutableStateOf(NavigationTab.RADAR) }
     var hasPermissions by remember { mutableStateOf(viewModel.deviceManager.hasRequiredPermissions()) }
     var showPermissionDialog by remember { mutableStateOf(false) }
+    var showInstallDialog by remember { mutableStateOf(false) }
 
     // Runtime Bluetooth permission launcher
     val permissionLauncher = rememberLauncherForActivityResult(
@@ -110,6 +114,12 @@ fun MainScreen(
                 showPermissionDialog = false
                 hasPermissions = viewModel.deviceManager.hasRequiredPermissions()
             }
+        )
+    }
+
+    if (showInstallDialog) {
+        InstallGuideDialog(
+            onDismiss = { showInstallDialog = false }
         )
     }
 
@@ -162,27 +172,57 @@ fun MainScreen(
                             }
                         }
 
-                        // Connection Status Badge
-                        Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(if (activeDevices.isNotEmpty()) MintEmerald.copy(alpha = 0.15f) else CyberSurface)
-                                .border(1.dp, if (activeDevices.isNotEmpty()) MintEmerald else CyberCardBorder, RoundedCornerShape(12.dp))
-                                .padding(horizontal = 10.dp, vertical = 6.dp)
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(6.dp)
-                                        .clip(CircleShape)
-                                        .background(if (activeDevices.isNotEmpty()) MintEmerald else TextMuted)
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = "${activeDevices.size} Connected",
-                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                    color = if (activeDevices.isNotEmpty()) MintEmerald else TextMuted
-                                )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            // Install App Action Badge
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(MintEmerald.copy(alpha = 0.2f))
+                                    .border(1.dp, MintEmerald, RoundedCornerShape(12.dp))
+                                    .clickable { showInstallDialog = true }
+                                    .padding(horizontal = 10.dp, vertical = 6.dp)
+                                    .testTag("top_install_app_btn")
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Default.GetApp,
+                                        contentDescription = "Install App",
+                                        tint = MintEmerald,
+                                        modifier = Modifier.size(14.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(
+                                        text = "Install",
+                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                        color = MintEmerald
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            // Connection Status Badge
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(if (activeDevices.isNotEmpty()) MintEmerald.copy(alpha = 0.15f) else CyberSurface)
+                                    .border(1.dp, if (activeDevices.isNotEmpty()) MintEmerald else CyberCardBorder, RoundedCornerShape(12.dp))
+                                    .padding(horizontal = 10.dp, vertical = 6.dp)
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Box(
+                                        modifier = Modifier
+                                            .size(6.dp)
+                                            .clip(CircleShape)
+                                            .background(if (activeDevices.isNotEmpty()) MintEmerald else TextMuted)
+                                    )
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Text(
+                                        text = "${activeDevices.size} Connected",
+                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                        color = if (activeDevices.isNotEmpty()) MintEmerald else TextMuted
+                                    )
+                                }
                             }
                         }
                     }
