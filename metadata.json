@@ -1,0 +1,6 @@
+{
+  "name": "Ultra Bluetooth Connector",
+  "description": "Ultra multi-device Bluetooth connector with instant pairing, proximity radar, and low latency optimization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

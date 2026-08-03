@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Bluetooth Main Icon -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M51.5,28L59,35.5L52.8,41.7L59,47.9L51.5,55.4L51.5,43.2L45.8,48.9L43.7,46.8L50.5,40L43.7,33.2L45.8,31.1L51.5,36.8L51.5,28ZM54.5,32.6L54.5,37.9L57.1,35.3L54.5,32.6ZM54.5,42.1L54.5,47.4L57.1,44.7L54.5,42.1Z" />
+    
+    <!-- Outer Node Circles representing multi-device connections -->
+    <path
+        android:fillColor="#00E5FF"
+        android:pathData="M32,54m-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0" />
+    <path
+        android:fillColor="#7C4DFF"
+        android:pathData="M76,54m-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0" />
+    <path
+        android:fillColor="#FF4081"
+        android:pathData="M54,76m-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0" />
+
+    <!-- Connecting Rays -->
+    <path
+        android:strokeColor="#8000E5FF"
+        android:strokeWidth="1.5"
+        android:pathData="M36,54 L44,48" />
+    <path
+        android:strokeColor="#807C4DFF"
+        android:strokeWidth="1.5"
+        android:pathData="M72,54 L64,48" />
+    <path
+        android:strokeColor="#80FF4081"
+        android:strokeWidth="1.5"
+        android:pathData="M54,72 L54,60" />
+</vector>
